@@ -1,0 +1,14 @@
+
+---
+
+- name: Edit PAM configs without special Ansible module
+  hosts: all
+  become: yes  
+
+  tasks:
+
+    - name: Enable PAM module (pwquality)
+      ansible.builtin.lineinfile:
+       path: /etc/pam.d/common-password
+       line: 'password    requisite     pam_pwquality.so usercheck=1'
+       create: yes

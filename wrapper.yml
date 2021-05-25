@@ -1,0 +1,21 @@
+
+---
+
+- name: Create TCP Wrapper rule
+  hosts: all
+  become: yes  
+
+  tasks:
+
+    - name: Add deny rule for all hosts
+      ansible.builtin.lineinfile:
+       path: /etc/hosts.deny
+       line: 'ALL: ALL'
+       create: yes
+
+
+    - name: Add allow rule for specific host
+      ansible.builtin.lineinfile:
+       path: /etc/hosts.allow
+       line: 'ALL: 192.168.1.50'
+       create: yes
